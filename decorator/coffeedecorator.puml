@@ -1,0 +1,28 @@
+@startuml
+interface Coffee {
+    +getDescription() : string
+    +cost() : double
+}
+
+class SimpleCoffee {
+    +getDescription() : string
+    +cost() : double
+}
+
+abstract class CoffeeDecorator {
+    -coffee : Coffee*
+    +getDescription() : string
+    +cost() : double
+}
+
+class MilkDecorator {
+    +getDescription() : string
+    +cost() : double
+}
+
+Coffee <|.. SimpleCoffee
+Coffee <|.. CoffeeDecorator
+CoffeeDecorator <|-- MilkDecorator
+CoffeeDecorator o-- Coffee
+
+@enduml
