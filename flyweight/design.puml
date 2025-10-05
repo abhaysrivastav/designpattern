@@ -1,0 +1,38 @@
+@startuml Flyweight_Pattern_Text_Editor
+
+class FontProperties {
+    - fontName : string
+    - fontSize : int
+    - fontStyle : string
+    - color : string
+    + operator<(other : FontProperties) : bool
+}
+
+class Font {
+    - fontProperties : FontProperties
+    + Font(props : FontProperties)
+    + display(c : char, x : int, y : int) : void
+}
+
+class FontFactory {
+    - fonts : map<FontProperties, shared_ptr<Font>>
+    + getFont(props : FontProperties) : shared_ptr<Font>
+    + getFlyweightCount() : int
+}
+
+class Client {
+    + main() : int
+}
+
+note right of Font : Flyweight\n- Stores intrinsic state\n- Uses extrinsic state as parameters
+
+note right of FontFactory : Flyweight Factory\n- Manages flyweight pool\n- Ensures object reuse\n- Prevents duplicates
+
+note right of FontProperties : Key for flyweight identification\n- All intrinsic properties\n- Used as map key
+
+FontFactory o-- Font : creates/manages
+Font *-- FontProperties : contains
+Client --> FontFactory : uses
+Client --> Font : uses
+
+@enduml
