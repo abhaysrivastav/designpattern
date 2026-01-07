@@ -27,7 +27,7 @@ public:
 class Shape
 {
 protected:
-    Renderer* renderer;
+    Renderer* renderer; // <- This is the bridge
 
 public:
     Shape(Renderer* ren): renderer(ren)
